@@ -10,9 +10,9 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите свое имя: ");
+            Console.Write("Введите свое Имя: ");
             var name = Console.ReadLine();       // вводим имя
-            Console.WriteLine($"Привет {name}");    // выводим имя на консоль
+            Console.WriteLine($"Привет, {name}!");    // выводим имя на консоль
         }
     }
 }
