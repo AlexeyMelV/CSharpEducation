@@ -36,23 +36,16 @@ namespace TicTacToe
                 string[] gamer = new[] { "Крестики", "Нолики" };
                 int i = 0, pob = 0;
 
-                while (i < pole.Length) { Console.WriteLine(pole[i]); i++; }; //отладка - проверка содержимого массива.
-                i = 0;
-
                 while (pob != 0 || i != 9)      //Процесс игры
                 {
-                    int a = i % 2;
                     Console.WriteLine();
-                    Console.Write(pole[2]);
-                    Console.Write(pole[3]);
-                    Console.Write(pole[4]);
-                    Console.WriteLine(" ", pole[2], " | ", pole[3], " | ", pole[4], " ");
+                    Console.WriteLine(" {0} | {1} | {2} ", pole[2], pole[3], pole[4]);
                     Console.WriteLine("---|---|---");
-                    Console.WriteLine(" ", pole[5], " | ", pole[6], " | ", pole[7], " ");
+                    Console.WriteLine(" {0} | {1} | {2} ", pole[5], pole[6], pole[7]);
                     Console.WriteLine("---|---|---");
-                    Console.WriteLine(" ", pole[8], " | ", pole[9], " | ", pole[10], " ");
+                    Console.WriteLine(" {0} | {1} | {2} ", pole[8], pole[9], pole[10]);
                     Console.WriteLine();
-                    Console.WriteLine("Ходят ", gamer[a]);
+                    Console.WriteLine("Ходят {0}", gamer[i%2]);
                     Console.WriteLine("Введите номер поля: ");
 
                     bool hodVer = false;
@@ -111,6 +104,7 @@ namespace TicTacToe
                             Console.WriteLine("Укажите свободное поле: ");
                         };
                     };
+                    i++;
                 }
             }
             //Результат игры
