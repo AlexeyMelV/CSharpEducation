@@ -18,6 +18,7 @@ namespace SnakeGame
 
     public void Print()
     {
+      Console.ForegroundColor = Color;
       Console.SetCursorPosition(X, Y);
       Console.Write('█');
     }
