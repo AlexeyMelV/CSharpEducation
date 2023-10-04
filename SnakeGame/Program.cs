@@ -15,8 +15,8 @@ namespace SnakeGame
 
     private const ConsoleColor FoodColor = ConsoleColor.Green;
 
-    private const ConsoleColor BodyColor = ConsoleColor.Cyan;
-    private const ConsoleColor HeadColor = ConsoleColor.DarkBlue;
+    private const ConsoleColor BodyColor = ConsoleColor.Gray;
+    private const ConsoleColor HeadColor = ConsoleColor.White;
 
     private static readonly Random Random = new Random();
 
@@ -94,7 +94,13 @@ namespace SnakeGame
       food.Clear();
 
       SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3);
-      WriteLine($"Game over, Score: {score}");
+      WriteLine($"Игра окончена,");
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 1);
+      WriteLine($"съедено: {score}.");
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 2);
+      WriteLine($"Для новой игры нажмите");
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 3);
+      WriteLine($"любую кнопку.");
 
       Task.Run(() => Beep(200, 600));
     }
