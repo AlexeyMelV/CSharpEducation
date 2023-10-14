@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using static System.Console;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace SnakeGame
 {
-  internal class Program
+  internal class SnakeGame
   {
     private const int SizeVertical = 40;
     private const int SizeHorizontal = 40;
 
-    private const int FrameMilliseconds = 100;
+    private const int FrameMilliseconds = 170;
 
     private const ConsoleColor PerimetrColor = ConsoleColor.Red;
 
@@ -26,6 +27,16 @@ namespace SnakeGame
       SetBufferSize(SizeVertical, SizeHorizontal);
       CursorVisible = false;
 
+      var scoreTable = new ScoreTable();
+
+
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3);
+      WriteLine($"Игра Змейка. 2023г.");
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 1);
+      WriteLine($"Для новой игры нажмите");
+      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 2);
+      WriteLine($"любую кнопку.");
+      ReadKey();
 
       while (true)
       {
@@ -43,6 +54,8 @@ namespace SnakeGame
       PrintPerimetr();
 
       Snake snake = new Snake(10, 5, HeadColor, BodyColor);
+
+      var scoreTable = new ScoreTable();
 
       Point food = GenFood(snake);
       food.Print();
@@ -90,7 +103,7 @@ namespace SnakeGame
         lagMs = (int)sw.ElapsedMilliseconds;
       }
 
-      snake.Clear();
+      Task.Run(() => Beep(200, 600));
       food.Clear();
 
       SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3);
@@ -98,11 +111,19 @@ namespace SnakeGame
       SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 1);
       WriteLine($"съедено: {score}.");
       SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 2);
+
+      Console.WriteLine("Введите имя Игрока:");
+      var name = Console.ReadLine();
+      var newGamer = new Gamer(name, score);
+      scoreTable.AddGamer(newGamer);
+
+      ReadKey();
+      Clear();
+      scoreTable.DisplayAllGamers();
       WriteLine($"Для новой игры нажмите");
-      SetCursorPosition(SizeVertical / 3, SizeHorizontal / 3 + 3);
       WriteLine($"любую кнопку.");
 
-      Task.Run(() => Beep(200, 600));
+
     }
 
     static Point GenFood(Snake snake)
